@@ -3,6 +3,8 @@ import '../models/produk.dart';
 import '../models/kamera.dart';
 import '../models/laptop.dart';
 import '../models/smartphone.dart';
+import '../exception/data_invalid_exception.dart';
+
 
 class Admin {
   // Collection 1 (List)
@@ -12,74 +14,96 @@ class Admin {
   // Collection 2 (Map)
   final Map<String, int> _totalPerKategori = {};
 
-  get produkList => _produkList;
-  get totalPerKategori => _totalPerKategori;
+  List<Produk> get produkList => _produkList;
+  Map<String, int> get totalPerKategori => _totalPerKategori;
 
 // Fitur 1 (Tambah Produk) - menggunakan async dan await untuk membuat simulasi loading
   Future<void> tambahProduk() async {  
-     print("="*60);
-     print(" Tambah Produk Baru");
-     print("="*60);
+    print("="*60);
+    print(" Tambah Produk Baru");
+    print("="*60);
 
-     print(" Kategori Produk  :");
-     print(" 1. Smartphone");
-     print(" 2. Laptop");
-     print(" 3. Kamera");
-     print("-"*60);
-     stdout.write(" Pilih kategori produk (1-3) : ");
-     var inputUser = stdin.readLineSync() ?? '';
-     print("-"*60);
+    print(" Kategori Produk  :");
+    print(" 1. Smartphone");
+    print(" 2. Laptop");
+    print(" 3. Kamera");
+    print("-"*60);
+    stdout.write(" Pilih kategori produk (1-3) : ");
+    var inputUser = stdin.readLineSync() ?? '';
+    print("-"*60);
 
 
-     stdout.write(" Nama Produk   : ");
-     String nama = stdin.readLineSync() ?? '';
+    stdout.write(" Nama Produk   : ");
+    String nama = stdin.readLineSync() ?? '';
 
-     stdout.write(" Harga Produk  : ");
-     double harga = double.tryParse(stdin.readLineSync() ?? '') ?? -1;
+    stdout.write(" Harga Produk  : ");
+    double harga = double.tryParse(stdin.readLineSync() ?? '') ?? -1;
 
-     stdout.write(" Stok Produk   : ");
-     int stok = int.tryParse(stdin.readLineSync() ?? '') ?? -1;
+    stdout.write(" Stok Produk   : ");
+    int stok = int.tryParse(stdin.readLineSync() ?? '') ?? -1;
 
-     Produk? produk;
+    // Validasi input
+    if (nama.trim().isEmpty) {
+      print(" [!] Gagal: Nama produk tidak boleh kosong.");
+      return;
+    }
+    if (harga < 0) {
+      print(" [!] Gagal: Harga produk tidak boleh negatif.");
+      return;
+    }
+    if (stok < 0) {
+      print(" [!] Gagal: Stok produk tidak boleh negatif.");
+      return;
+    }
 
-     switch (inputUser) {
-       case '1':
-         stdout.write(" Chipset       : ");
-         String chipset = stdin.readLineSync() ?? '';
+    Produk? produk;
 
-         stdout.write(" RAM (GB)      : ");
-         int ram = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
+  try {
+    switch (inputUser) {
+      case '1':
+        stdout.write(" Chipset       : ");
+        String chipset = stdin.readLineSync() ?? '';
 
-         stdout.write(" ROM (GB)      : ");
-         int rom = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
+        stdout.write(" RAM (GB)      : ");
+        int ram = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
 
-         produk = Smartphone(nama, harga, stok, chipset, ram, rom);
-         break;
+        stdout.write(" ROM (GB)      : ");
+        int rom = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
 
-       case '2':
-         stdout.write(" Processor     : ");
-         String processor = stdin.readLineSync() ?? '';
+        produk = Smartphone(nama, harga, stok, chipset, ram, rom);
+        break;
 
-         stdout.write(" RAM (GB)      : ");
-         int ram = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
+      case '2':
+        stdout.write(" Processor     : ");
+        String processor = stdin.readLineSync() ?? '';
 
-         produk = Laptop(nama, harga, stok, processor, ram);
-         break;
+        stdout.write(" RAM (GB)      : ");
+        int ram = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
 
-       case '3':
-         stdout.write(" Jenis Kamera  : ");
-         String jenisKamera = stdin.readLineSync() ?? '';
+        produk = Laptop(nama, harga, stok, processor, ram);
+        break;
 
-         stdout.write(" Resolusi (MP) : ");
-         int resolusiKamera = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
+      case '3':
+        stdout.write(" Jenis Kamera  : ");
+        String jenisKamera = stdin.readLineSync() ?? '';
 
-         produk = Kamera(nama, harga, stok, jenisKamera, resolusiKamera);
-         break;
+        stdout.write(" Resolusi (MP) : ");
+        int resolusiKamera = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
 
-       default:
-         print(" Pilihan tidak valid. Silakan pilih 1-3.");
-         return;
-     }
+        produk = Kamera(nama, harga, stok, jenisKamera, resolusiKamera);
+        break;
+
+      default:
+        print(" Pilihan tidak valid. Silakan pilih 1-3.");
+        return;
+     }  
+    } on DataInvalidException catch (e) {
+      print(e.toString());
+      return;
+    } catch (e) {
+      print(" Terjadi kesalahan: $e");
+      return;
+    }
 
     print("\n Menambahkan Data ke database...");
     await Future.delayed(Duration(seconds: 2));
