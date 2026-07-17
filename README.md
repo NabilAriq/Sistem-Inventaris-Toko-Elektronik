@@ -33,7 +33,7 @@ untuk fitur simpan data, saya jadikan satu di fitur tambah data agar lebih efekt
 2. Clone atau download project ini, lalu masuk ke folder project:
    ```
    git clone https://github.com/NabilAriq/Sistem-Inventaris-Toko-Elektronik
-   cd project_uas_toko_elektronik
+   cd Sistem-Inventaris-Toko-Elektronik
    ```
 3. Jalankan program dengan perintah:
    ```
