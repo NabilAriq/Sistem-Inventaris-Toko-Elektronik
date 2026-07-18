@@ -74,37 +74,32 @@ Dart SDK terinstall**, cocok untuk dibagikan ke komputer lain.
 > juga untuk Linux/macOS. Jika ingin menjalankan di OS lain, lakukan compile
 > ulang di OS yang bersangkutan.
 
-Lokasi File Hasil Export CSV
-
-Setiap kali fitur Export ke CSV dijalankan, program akan otomatis membuat
-folder bernama exports/ (jika belum ada) di lokasi yang sama dengan tempat
-program dijalankan, bukan di lokasi source code atau file .exe itu sendiri.
+## Lokasi File Hasil Export CSV
+Setiap kali fitur **Export ke CSV** dijalankan, program akan otomatis membuat
+folder bernama `exports/` (jika belum ada) di lokasi yang sama dengan **tempat
+program dijalankan**, bukan di lokasi source code atau file `.exe` itu sendiri.
 
 Contoh:
-
-
-Jika program dijalankan dengan dart run bin/main.dart dari dalam folder
-project, maka folder exports/ akan muncul di root project:
-
-
+- Jika program dijalankan dengan `dart run bin/main.dart` dari dalam folder
+  project, maka folder `exports/` akan muncul di root project:
+  ```
   Sistem-Inventaris-Toko-Elektronik/
   ├── bin/
   ├── lib/
   ├── exports/                     <-- muncul di sini
   │   └── data_inventaris_2026-07-18_143022.csv
   └── README.md
-
-
-Jika program dijalankan sebagai file .exe (Opsi B) dari suatu folder,
-misal dari Desktop, maka folder exports/ akan muncul di Desktop tersebut,
-sejajar dengan file .exe-nya:
-
-
+  ```
+- Jika program dijalankan sebagai file `.exe` (Opsi B) dari suatu folder,
+  misal dari Desktop, maka folder `exports/` akan muncul di Desktop tersebut,
+  sejajar dengan file `.exe`-nya:
+  ```
   Desktop/
   ├── toko_elektronik.exe
   └── exports/                     <-- muncul di sini
       └── data_inventaris_2026-07-18_143022.csv
+  ```
 
 Setelah file CSV tersimpan, program akan menampilkan path lengkap file
-tersebut di terminal (contoh: exports/data_inventaris_2026-07-18_143022.csv),
+tersebut di terminal (contoh: `exports/data_inventaris_2026-07-18_143022.csv`),
 sehingga bisa langsung dibuka dengan Excel atau Google Sheets.
