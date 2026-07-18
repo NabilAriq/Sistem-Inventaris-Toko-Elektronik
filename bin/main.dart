@@ -17,6 +17,7 @@ void main() async {
     print(" 2. Tampilkan Inventaris");
     print(" 3. Cari Produk");
     print(" 4. Hitung Total Nilai Inventaris");
+    print(" 5. Export ke CSV (Excel)");
     print(" 5. Keluar");
     print("="*60);
     stdout.write(" Pilih menu (1-5) : ");
@@ -39,6 +40,9 @@ void main() async {
           admin.tampilkanTotalNilaiInventaris();
           break;
         case '5':
+          await admin.exportKeCsv();
+          break;
+        case '6':
           print(" System Shutdown...");
           await Future.delayed(Duration(seconds: 2));
           running = false;

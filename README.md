@@ -19,12 +19,21 @@ Smartphone, dan Aksesoris.
 3. **Cari Data** — mencari produk berdasarkan kata kunci nama.
 4. **Hitung Total** — menampilkan jumlah total produk dan total nilai
    inventaris (harga x stok seluruh produk).
-5. **Keluar** — mengakhiri program.
+5. **Export ke CSV (Excel)** — meng-export seluruh data produk ke file CSV
+   yang bisa langsung dibuka di Excel / Google Sheets. File otomatis
+   tersimpan di folder `exports/` dengan nama yang mengandung timestamp
+   (misal `exports/data_inventaris_2026-07-18_143022.csv`), sehingga hasil
+   export sebelumnya tidak akan tertimpa.
+6. **Keluar** — mengakhiri program.
 
 note :
 untuk fitur simpan data, saya jadikan satu di fitur tambah data agar lebih efektif, karena setiap penambahan data akan otomatis tersimpan.
 
 ## Cara Menjalankan Program
+
+Ada 2 cara untuk menjalankan program ini:
+
+### Opsi A — Menjalankan langsung dengan Dart SDK
 1. Pastikan Dart SDK sudah terinstall di komputer.
    Cek pada terminal dengan perintah:
    ```
@@ -41,3 +50,26 @@ untuk fitur simpan data, saya jadikan satu di fitur tambah data agar lebih efekt
    ```
 4. Program akan menampilkan menu di terminal. Pilih angka 1-6 sesuai
    fitur yang ingin digunakan, lalu ikuti instruksi input yang muncul.
+
+### Opsi B — Menjalankan sebagai file executable (.exe)
+Cara ini menghasilkan file program mandiri yang bisa dijalankan **tanpa perlu
+Dart SDK terinstall**, cocok untuk dibagikan ke komputer lain.
+
+1. Compile program menjadi file executable:
+   ```
+   dart compile exe bin/main.dart -o toko_elektronik.exe
+   ```
+2. Jalankan file hasil compile:
+   - **Windows:**
+     ```
+     toko_elektronik.exe
+     ```
+   - **Linux / macOS:**
+     ```
+     ./toko_elektronik.exe
+     ```
+
+> Catatan: file `.exe` hasil compile bersifat khusus per sistem operasi.
+> File yang di-compile di Windows hanya bisa dijalankan di Windows, begitu
+> juga untuk Linux/macOS. Jika ingin menjalankan di OS lain, lakukan compile
+> ulang di OS yang bersangkutan.
