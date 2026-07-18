@@ -26,8 +26,8 @@ Smartphone, dan Aksesoris.
    export sebelumnya tidak akan tertimpa.
 6. **Keluar** — mengakhiri program.
 
-note :
-untuk fitur simpan data, saya jadikan satu di fitur tambah data agar lebih efektif, karena setiap penambahan data akan otomatis tersimpan.
+> note :
+> untuk fitur simpan data, saya jadikan satu di fitur tambah data agar lebih efektif, karena setiap penambahan data akan otomatis tersimpan.
 
 ## Cara Menjalankan Program
 
@@ -57,16 +57,16 @@ Dart SDK terinstall**, cocok untuk dibagikan ke komputer lain.
 
 1. Compile program menjadi file executable:
    ```
-   dart compile exe bin/main.dart -o toko_elektronik.exe
+   dart compile exe bin/main.dart -o sistem_inventaris_toko_elektronik.exe
    ```
 2. Jalankan file hasil compile:
    - **Windows:**
      ```
-     toko_elektronik.exe
+     sistem_inventaris_toko_elektronik.exe
      ```
    - **Linux / macOS:**
      ```
-     ./toko_elektronik.exe
+     ./sistem_inventaris_toko_elektronik.exe
      ```
 
 > Catatan: file `.exe` hasil compile bersifat khusus per sistem operasi.
