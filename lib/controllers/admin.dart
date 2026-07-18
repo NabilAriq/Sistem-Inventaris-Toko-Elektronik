@@ -191,6 +191,59 @@ void tampilkanTotalNilaiInventaris() {
   print(' Total Nilai Inventaris : Rp${total.toStringAsFixed(0)}');
   print("-"*60);
 }
+
+
+// Fitur 5 (Export ke CSV/Excel)
+Future<void> exportKeCsv({String namaFile = 'data_inventaris.csv'}) async {
+  if (produkList.isEmpty) {
+    print(' [!] Tidak ada produk untuk di-export.');
+    return;
+  }
+
+  // Membungkus value yang mengandung koma dengan string agar CSV tidak rusak
+  String amankan(String value) => value.contains(',') ? '"$value"' : value;
+
+  final buffer = StringBuffer();
+  buffer.writeln('Nama,Kategori,Harga,Stok,Nilai Total');
+
+  for (var produk in produkList) {
+    buffer.writeln([
+      amankan(produk.nama),
+      produk.kategori,
+      produk.harga.toStringAsFixed(0),
+      produk.stok,
+      produk.nilaiTotal.toStringAsFixed(0),
+    ].join(','));
+  }
+
+  print("="*60);
+  print(' Export Data ke CSV');
+  print("="*60);
+  print(' Menyimpan data ke file...');
+  await Future.delayed(Duration(seconds: 2));
+
+  // Membuat folder exports otomatis jika belum ada
+  final folderExport = Directory('exports');
+  if (!await folderExport.exists()) {
+    await folderExport.create(recursive: true);
+  }
+
+  // Nama file unik dengan timestamp agar export sebelumnya tidak tertimpa
+  final now = DateTime.now();
+  String dua(int angka) => angka.toString().padLeft(2, '0');
+  final timestamp = '${now.year}-${dua(now.month)}-${dua(now.day)}_${dua(now.hour)}${dua(now.minute)}${dua(now.second)}';
+  final namaFile = 'exports/data_inventaris_$timestamp.csv';
+
+  final file = File(namaFile);
+  await file.writeAsString(buffer.toString());
+
+  print(' Data berhasil di-export ke file "$namaFile"');
+  print(' File dapat langsung dibuka dengan Excel / Google Sheets.');
+  print("-"*60);
 }
+}
+   
+
+
    
   
